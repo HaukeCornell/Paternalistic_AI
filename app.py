@@ -50,31 +50,31 @@ def index():
     app.logger.info('Serving index.html')
     return send_from_directory(app.static_folder, 'index.html')
 
-# Sets up the /chat route to handle chat requests from the React app.
-@app.route("/chat", methods=["POST"])
-def chat():
+@app.route("/<chatbot_type>/chat", methods=["POST"])
+def chat(chatbot_type):
+    if chatbot_type not in chatbot_behaviors:
+        return jsonify({"message": "Invalid chatbot type."}), 400
+
     message = request.json["message"]
     chat_history = request.json["chat_history"]
 
+    chatbot_behavior = chatbot_behaviors[chatbot_type]
+
     try:
-        messages = [{"role": "system", "content": "You are a helpful assistant."}]
-        for chat in chat_history:
-            # Change the role from 'bot' to 'assistant' here
-            role = chat["from"] if chat["from"] != "bot" else "assistant"
-            messages.append({"role": role, "content": chat["message"]})
-        messages.append({"role": "user", "content": message})
-        
-        print("Request messages:", messages)
+        messages = [{"role": "system", "content": chatbot_behavior["instruction"]}]
+        # Rest of your code...
 
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=messages,
             max_tokens=700,
-            temperature=0.7,
+            temperature=chatbot_behavior["temperature"],  # Use the temperature from the behavior
             top_p=1,
             frequency_penalty=0,
             presence_penalty=0,
         )
+        # Rest of your code...
+
         ai_message = response.choices[0].message["content"].strip()
 
     except openai.error.APIError as e:
