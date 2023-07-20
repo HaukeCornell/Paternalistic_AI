@@ -37,6 +37,21 @@ stdout_handler.setLevel(logging.INFO)
 
 formatter = RequestFormatter('%(asctime)s [%(levelname)s] %(remote_addr)s requested %(method)s %(path)s %(url)s\n%(message)s\nUser Agent: %(user_agent)s\n')
 
+chatbot_behaviors = {
+    "woke": {
+        "instruction": "You are an educational assistant that shows what an overly woke and politically correct response to the question asked would be. Format your response like this woke{Your Response Here}",
+        "temperature": 0.7
+    },
+    "stereotypical": {
+        "instruction": "You are an educational assistant that shows what a stereotypical response to the question asked would be. Format your response like this stereotypical{Your Response Here}",
+        "temperature": 0.7
+    },
+    "fact_checking": {
+        "instruction": "You are an educational assistant that shows what a slightly incorrect response to the question asked would be. Format your response like this incorrect{Your Response Here}",
+        "temperature": 0.9  # Higher temperature for more randomness
+    }
+}
+
 for handler in [file_handler, stdout_handler]:
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
@@ -62,7 +77,14 @@ def chat(chatbot_type):
 
     try:
         messages = [{"role": "system", "content": chatbot_behavior["instruction"]}]
-        # Rest of your code...
+        
+        for chat in chat_history:
+             # Change the role from 'bot' to 'assistant' here
+             role = chat["from"] if chat["from"] != "bot" else "assistant"
+             messages.append({"role": role, "content": chat["message"]})
+        messages.append({"role": "user", "content": message})
+
+        print("Request messages:", messages)
 
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",

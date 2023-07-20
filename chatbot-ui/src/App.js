@@ -14,6 +14,8 @@ function App() {
       debounceTimer = setTimeout(() => func.apply(context, args), delay);
     };
   };
+
+  const [chatbotType, setChatbotType] = useState('woke'); // Default to 'woke'
   
   const [message, setMessage] = useState('');
   const processAIResponse = (response) => {
@@ -44,8 +46,8 @@ function App() {
   const isHttps = window.location.protocol === "https:";
 
   const apiUrl = isProduction && isHttps
-  ? `${window.location.protocol}//${window.location.hostname}/chat`
-  : `${window.location.protocol}//${window.location.hostname}:5000/chat`;
+  ? `${window.location.protocol}//${window.location.hostname}/${chatbotType}/chat`
+  : `${window.location.protocol}//${window.location.hostname}:5000/${chatbotType}/chat`;
 
   useEffect(() => {
     const chatContainer = document.querySelector('.chat-container');
@@ -114,6 +116,10 @@ function App() {
 
   return (
     <div className="App">
+      <button onClick={() => setChatbotType('woke')}>Woke</button>
+      <button onClick={() => setChatbotType('stereotypical')}>Stereotypical</button>
+      <button onClick={() => setChatbotType('fact_checking')}>Fact Checking</button>
+
       <button onClick={toggleSavedChats} className="saved-chats-btn">
         Saved Chats
       </button>

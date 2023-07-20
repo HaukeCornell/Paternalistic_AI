@@ -403,11 +403,11 @@ Description=TKS Chat Bot
 After=network.target
 
 [Service]
-User=edit_for_user  ( normally your user name )
-Group=edit_for_group  ( normally your user name )
-WorkingDirectory=/path/to/your/flask/app/TKS-GPT
-Environment="PATH=/path/to/your/TKS-GPT/venv/bin"
-ExecStart=/path/to/your/venv/bin/python3 app.py
+User=farlab
+Group=farlab
+WorkingDirectory=/home/farlab/Documents/EthicalAutonomy/TKS-GPT
+Environment="/home/farlab/Documents/EthicalAutonomy/TKS-GPT/venv/bin"
+ExecStart=/home/farlab/Documents/EthicalAutonomy/TKS-GPT/venv/bin/python app.py
 Restart=on-failure
 RestartSec=5s
 
