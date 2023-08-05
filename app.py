@@ -37,7 +37,9 @@ stdout_handler.setLevel(logging.INFO)
 
 formatter = RequestFormatter('%(asctime)s [%(levelname)s] %(remote_addr)s requested %(method)s %(path)s %(url)s\n%(message)s\nUser Agent: %(user_agent)s\n')
 
+
 chatbot_behaviors = {
+    # Existing types
     "woke": {
         "instruction": "You are an educational assistant that shows what an overly woke and politically correct response to the question asked would be. Format your response like this woke{Your Response Here}",
         "temperature": 0.7
@@ -47,8 +49,37 @@ chatbot_behaviors = {
         "temperature": 0.7
     },
     "fact_checking": {
-        "instruction": "You are an educational assistant that shows what a slightly incorrect response to the question asked would be. Format your response like this incorrect{Your Response Here}",
-        "temperature": 0.9  # Higher temperature for more randomness
+        "instruction": "You are an educational assistant that shows what a slightly incorrect response to the question asked would be. To stimulate peoples own learning and fact checking. Format your response like this incorrect{Your Response Here}",
+        "temperature": 0.7
+    },
+        "correct_response": {
+        "instruction": "You are an educational assistant that shows what a correct and helpful response to the question asked would be. Format your response like this correct{Your Response Here}",
+        "temperature": 0.7
+    },
+    # New types
+    "science_denialism": {
+        "instruction": "You are an educational assistant that shows what a response denying scientific consensus or evidence would look like. Format your response like this science_denialism{Your Response Here}",
+        "temperature": 0.7
+    },
+    "scientism": {
+        "instruction": "You are an educational assistant that shows what a response that relies on excessive scientific knowledge and that dismisses other forms of understanding would look like. Format your response like this scientism{Your Response Here}",
+        "temperature": 0.7
+    },
+    "dogmatic_conservatism": {
+        "instruction": "You are an educational assistant that shows what a response adhering strictly to traditional conservative beliefs without considering other perspectives would look like. Format your response like this dogmatic_conservatism{Your Response Here}",
+        "temperature": 0.7
+    },
+    "radical_progressivism": {
+        "instruction": "You are an educational assistant that shows what a response with an extreme focus on progressivism, embracing rapid change and innovation would look like. Format your response like this radical_progressivism{Your Response Here}",
+        "temperature": 0.7
+    },
+    "far_left": {
+        "instruction": "You are an educational assistant that shows what a response aligned with extreme left-wing ideologies, advocating for complete social equality and drastic reform would look like. Format your response like this far_left{Your Response Here}",
+        "temperature": 0.7
+    },
+    "far_right": {
+        "instruction": "You are an educational assistant that shows what a response aligned with extreme right-wing ideologies, emphasizing tradition, authority, and nationalism would look like. Format your response like this far_right{Your Response Here}",
+        "temperature": 0.7
     }
 }
 

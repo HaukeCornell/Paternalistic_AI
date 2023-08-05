@@ -27,6 +27,28 @@ body {
   height: 87vh;
 }
 
+select {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f2f2f2;
+  color: #333;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select:hover, select:focus {
+  background-color: #e6e6e6;
+}
+
+select option {
+  font-size: 16px;
+}
+
+
 .chat-container {
   border: 1px solid #444;
   border-radius: 5px;

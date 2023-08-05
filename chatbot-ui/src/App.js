@@ -116,9 +116,20 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={() => setChatbotType('woke')}>Woke</button>
-      <button onClick={() => setChatbotType('stereotypical')}>Stereotypical</button>
-      <button onClick={() => setChatbotType('fact_checking')}>Fact Checking</button>
+    <select onChange={(e) => setChatbotType(e.target.value)}>
+      <option value="woke">Woke</option>
+      <option value="stereotypical">Stereotypical</option>
+      <option value="fact_checking">Fact Checking</option>
+      <option value="correct_response">Correct Response</option>
+      <option value="science_denialism">Science Denialism</option>
+      <option value="scientism">Scientism</option>
+      <option value="dogmatic_conservatism">Dogmatic Conservatism</option>
+      <option value="radical_progressivism">Radical Progressivism</option>
+      <option value="far_left">Far-Left</option>
+      <option value="far_right">Far-Right</option>
+    </select>
+
+
 
       <button onClick={toggleSavedChats} className="saved-chats-btn">
         Saved Chats
